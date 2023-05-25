@@ -1,5 +1,17 @@
 
-arquivo_contatos = open('contatos.csv')
+arquivo_contatos = open('contatos.csv', mode='a+')
+
+contatos = ['11,Carol,carol@carol.com.br\n',
+           '12,Ana,ana@ana.com.br\n',
+           '13,Claudia,claudia@claudia.com.br\n',
+           '14,Jose,jose@jose.com.br\n']
+
+for contato in contatos:
+    arquivo_contatos.write(contato.upper())
+
+arquivo_contatos.flush()
+arquivo_contatos.seek(0)
 
 for linha in arquivo_contatos:
     print(linha, end='')
+
