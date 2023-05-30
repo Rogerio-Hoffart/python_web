@@ -1,17 +1,12 @@
+import contatos_converter
 
-arquivo_contatos = open('contatos.csv', mode='a+')
+try:
+    contatos = contatos_converter.csv_para_contatos('contatos.csv', 'windows-1252')
 
-contatos = ['11,Carol,carol@carol.com.br\n',
-           '12,Ana,ana@ana.com.br\n',
-           '13,Claudia,claudia@claudia.com.br\n',
-           '14,Jose,jose@jose.com.br\n']
+    for contato in contatos:
+        print(f'{contato.id} - {contato.nome} - {contato.email} ')
 
-for contato in contatos:
-    arquivo_contatos.write(contato.upper())
-
-arquivo_contatos.flush()
-arquivo_contatos.seek(0)
-
-for linha in arquivo_contatos:
-    print(linha, end='')
-
+except FileNotFoundError:
+    print('Arquivo não encontrado')
+except PermissionError:
+    print('Acesso ao arquivo negado')
